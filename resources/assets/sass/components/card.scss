@@ -1,0 +1,24 @@
+.md-card {
+    &.card-selected-package {
+        background-color: #fff;
+        color: #444;
+
+        .md-subhead {
+            opacity: 1;
+        }
+
+        .md-icon.md-theme-default.md-icon-font {
+            color: md-get-palette-color(blue, A200);
+        }
+    }
+
+    &.md-theme-default.md-primary {
+        .md-list.md-theme-default {
+            background-color: transparent;
+        }
+
+        a {
+            color: #fff;
+        }
+    }
+}

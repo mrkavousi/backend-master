@@ -1,0 +1,170 @@
+[dir="rtl"] {
+
+    .md-field {
+        label {
+            left: auto;
+            right: 0;
+        }
+    
+        &.md-has-password {
+            .md-toggle-password {
+                right: auto;
+                left: 0;
+            }
+        }
+    }
+    
+    .md-list-item-content {
+        & > .md-icon:first-child {
+            margin-left: 32px;
+            margin-right: 0;
+        }
+        .md-list-action:last-of-type {
+            margin: 0 16px 0 -10px;
+        }
+    }
+    
+    .md-list-item-content>.md-icon:last-child {
+        margin-left: 0;
+        margin-right: 16px;
+    }
+    
+    .md-table-head {
+        text-align: right;
+    }
+    
+    .ql-editor {
+        text-align: right !important;
+    }
+    .ql-toolbar {
+        // direction: ltr;
+        // text-align: right;
+    }
+    .ql-toolbar.ql-snow .ql-formats {
+        margin-right: 0 !important;
+        margin-left: 15px;
+    }
+    .ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+        right: auto !important;
+        left: 0;
+    }
+    
+    .md-toolbar .md-button~.md-title, .md-toolbar .md-icon~.md-title {
+        margin-left: 0;
+        margin-right: 24px;
+    }
+    
+    .md-field.md-has-textarea:not(.md-autogrow) label {
+        left: auto;
+        right: 16px;
+    }
+    
+    .md-switch .md-switch-container {
+        direction: ltr;
+    }
+    
+    .md-switch .md-switch-label {
+        padding-left: 0;
+        padding-right: 16px;
+    }
+    
+    .md-chips.md-field .md-chip:last-of-type {
+        margin-left: 8px;
+        margin-right: 0;
+    }
+    
+    .md-field.md-clearable .md-input {
+        padding-right: 0;
+        padding-left: 30px;
+    }
+    
+    .md-field .md-input-action {
+        right: auto;
+        left: 0;
+    }
+    
+    .md-list-item-container {
+        text-align: right;
+    }
+    
+    .md-field.md-has-file .md-input {
+        margin-left: 0;
+        margin-right: 12px;
+    }
+    
+    .md-field.md-has-file:after, .md-field.md-has-file:before, .md-field.md-has-file label {
+        left: 0;
+        right: 36px;
+    }
+    
+    .md-field>.md-icon~.md-file, .md-field>.md-icon~.md-input, .md-field>.md-icon~.md-textarea {
+        margin-left: 0;
+        margin-right: 12px;
+    }
+    
+    .md-field>.md-icon~label {
+        right: 36px;
+        left: 0;
+    }
+    
+    .md-list-item.md-inset .md-list-item-content {
+        padding-right: 72px;
+        padding-left: 16px;
+    }
+    
+    .md-checkbox .md-checkbox-container .md-ripple {
+        margin-right: -32px;
+    }
+    
+    .md-radio .md-radio-container .md-ripple {
+        margin-right: -32px;
+    }
+    .md-radio .md-radio-label {
+        padding-right: 12px;
+    }
+    
+    .md-badge {
+        right: 4px;
+        left: auto;
+    }
+
+    .md-drawer .md-toolbar .md-badge {
+        right: auto !important;
+        left: 12px;
+    }
+    
+    .md-toolbar .md-toolbar-offset {
+        margin-left: 0;
+        margin-right: 56px;
+        @media (max-width: 960px) {
+            margin-left: 0;
+            margin-right: 48px;
+        }
+        @media (max-width: 600px) {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+    
+    .md-dialog-actions {
+        padding: 8px 24px 8px 8px;
+    }
+    
+    .md-tabs {
+        direction: ltr;
+        .md-tabs-navigation,
+        .md-tab {
+            direction: rtl;
+        }
+    }
+    
+    .md-snackbar-content .md-button {
+        margin: -8px 36px -8px -8px;
+    }
+
+    .md-list-item-content>.md-avatar:first-child {
+        margin-left: 16px;
+        margin-right: 0;
+    }
+    
+}
