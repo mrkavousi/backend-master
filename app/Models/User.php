@@ -12,10 +12,10 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable, EntrustUserTrait, Metable;
+    use Notifiable, EntrustUserTrait, Metable, HasRole;
 
 
-    protected $appends = ['hashid'];
+    protected $appends = ['hashid','all_permissions','can'];
 
     protected $with = ['roles'];
 
