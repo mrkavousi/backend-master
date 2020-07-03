@@ -67,8 +67,8 @@ class UserController extends Controller
         $user->save();
 
         if ($user->id) {
-
-            $user->roles()->sync([$request->roles[0]['id']]);
+            if ($request->role['id'] > 0)
+                $user->roles()->sync([$request->role['id']]);
 
             // Add Metadata
             foreach ($request->metadatas as $key => $value) {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Role;
+use App\Permission;
 
 class RoleController extends Controller
 {
@@ -57,8 +58,8 @@ class RoleController extends Controller
 
         //Get the permissions linked to the role
         $permissions = Permission::join("permission_role","permission_role.permission_id","=","permissions.id")
-            ->where("permission_role.role_id",$id)
-            ->get();
+                ->where("permission_role.role_id",$id)
+                ->get();
 
         //return the view with the role info and its permissions
         return view('roles.show',compact('role','permissions'));
