@@ -15,12 +15,13 @@ class FeedingTabale extends Migration
     {
         Schema::create('feeding', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('type_id')->references('id')->on('types');
-            $table->timestamps();
-            $table->timestamps('feedtime');
+            $table->integer('type_id')->unsigned();
+            $table->integer('location_id')->unsigned();
+            $table->timestamps('feed_time');
+           // $table->foreign('type_id')->references('id')->on('types');
             $table->foreign('location_id')->references('id')->on('locations');
-            $table->foreign('id')->references('id')->on('foodtype');
-
+            $table->foreign('type_id')->references('id')->on('food_type');
+            $table->timestamps();
             $table->softDeletes();
         });
     }
