@@ -13,7 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['domain' => env('API_SUBDOMAIN') . '.' . env('APP_DOMAIN') . '.' . env('APP_TLD')], function () {
+
+/*Route::group(['domain' => env('API_SUBDOMAIN') . '.' . env('APP_DOMAIN') . '.' . env('APP_TLD')], function () {*/
 
     // Version 1
     Route::group(['prefix' => 'v1'], function () {
@@ -244,12 +245,20 @@ Route::group(['domain' => env('API_SUBDOMAIN') . '.' . env('APP_DOMAIN') . '.' .
             Route::put('/packages/{hashid}', 'Package\PackageController@adminUpdate')->name('api.packages.update');
             // -----
 
-            // Roles
             // --
+            // Roles
             // List
             Route::get('/roles', 'Role\RoleController@adminList')->name('api.roles');
             // Add
-            Route::post('/roles/add', 'Role\RoleController@adminAdd')->name('api.roles.add');
+            Route::post('/roles/add', 'Role\RoleController@store')->name('api.roles.add');
+            // -----
+
+            // --
+            // Permissions
+            // List
+            Route::get('/permissions', 'Permission\PermissionController@adminList')->name('api.permissions');
+            // Add
+            Route::post('/permissions/add', 'Permission\PermissionController@store')->name('api.permissions.add');
             // -----
 
             // Attachments
@@ -272,4 +281,4 @@ Route::group(['domain' => env('API_SUBDOMAIN') . '.' . env('APP_DOMAIN') . '.' .
 
     });
 
-});
+/*});*/
