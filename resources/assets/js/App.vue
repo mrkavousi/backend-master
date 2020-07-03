@@ -126,7 +126,6 @@
                     <md-list-item md-expand v-if="$auth.user().roles[0].name == 'admin'">
                         <md-icon>bubble_chart</md-icon>
                         <span class="md-list-item-text">{{ Translate('sizes') }}</span>
-
                         <md-list slot="md-expand">
                             <md-list-item class="md-inset" to="/sizes/add">{{ Translate('add') }}</md-list-item>
                             <md-list-item class="md-inset" to="/sizes">{{ Translate('list') }}</md-list-item>
@@ -163,10 +162,9 @@
                         </md-list>
                     </md-list-item>
 
-                    <md-list-item md-expand v-if="$auth.user().roles[0].name == 'admin'">
+                    <md-list-item md-expand v-if="$auth.user().can['users']">
                         <md-icon>group</md-icon>
                         <span class="md-list-item-text">{{ Translate('users') }}</span>
-
                         <md-list slot="md-expand">
                             <md-list-item class="md-inset" to="/users/add">{{ Translate('add') }}</md-list-item>
                             <md-list-item class="md-inset" to="/users">{{ Translate('list') }}</md-list-item>
@@ -174,6 +172,7 @@
                             <md-list-item class="md-inset" to="/permissions">سطح دسترسی ها</md-list-item>
                         </md-list>
                     </md-list-item>
+
                 </md-list>
             </md-app-drawer>
 
