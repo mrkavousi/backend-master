@@ -14,7 +14,7 @@ class FoodtypeTable extends Migration
     public function up()
     {
         //
-        Schema::create('foodtype', function (Blueprint $table) {
+        Schema::create('food_type', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->text('description')->nullable();
@@ -31,6 +31,6 @@ class FoodtypeTable extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('foodtype');
+        Schema::dropIfExists('food_type');
     }
 }
