@@ -170,6 +170,8 @@
                         <md-list slot="md-expand">
                             <md-list-item class="md-inset" to="/users/add">{{ Translate('add') }}</md-list-item>
                             <md-list-item class="md-inset" to="/users">{{ Translate('list') }}</md-list-item>
+                            <md-list-item class="md-inset" to="/roles">نقش‌ها</md-list-item>
+                            <md-list-item class="md-inset" to="/permissions">سطح دسترسی ها</md-list-item>
                         </md-list>
                     </md-list-item>
                 </md-list>
