@@ -37,7 +37,7 @@
 
                         <md-field v-if="roles">
                             <label for="roles">{{ Translate('role') }}</label>
-                            <md-select v-model="user.roles[0].id" id="roles">
+                            <md-select v-model="user.roles.id" id="roles">
                                 <md-option v-for="role in roles" :key="role.id" :value="role.id">{{role.display_name}}</md-option>
                             </md-select>
                         </md-field>
@@ -81,9 +81,9 @@ export default {
             email: '',
             mobile: '',
             password: '',
-            roles: [{
-                id: 0
-            }],
+            roles: {
+                id: '',
+            },
             metadatas: {
                 name: '',
                 locale: '',
