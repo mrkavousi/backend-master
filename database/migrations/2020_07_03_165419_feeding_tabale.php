@@ -17,7 +17,7 @@ class FeedingTabale extends Migration
             $table->increments('id');
             $table->integer('type_id')->unsigned();
             $table->integer('location_id')->unsigned();
-            $table->timestamps('feed_time');
+            $table->dateTime('feed_time');
            // $table->foreign('type_id')->references('id')->on('types');
             $table->foreign('location_id')->references('id')->on('locations');
             $table->foreign('type_id')->references('id')->on('food_type');
