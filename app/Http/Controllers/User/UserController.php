@@ -42,7 +42,6 @@ class UserController extends Controller
     {
         $userId = Hashids::connection('general')->decode($hashid); $userId = $userId[0];
         $user = User::findOrFail($userId);
-
         $user->metadatas = [];
         foreach ($user->metadata as $meta) {
             if ($meta->value === 'true')
@@ -67,8 +66,8 @@ class UserController extends Controller
         $user->save();
 
         if ($user->id) {
-            if ($request->role['id'] > 0)
-                $user->roles()->sync([$request->role['id']]);
+            if ($request->roles['id'] > 0)
+                $user->roles()->sync([$request->roles['id']]);
 
             // Add Metadata
             foreach ($request->metadatas as $key => $value) {
