@@ -26,8 +26,8 @@
                     <b class="fw-9">{{ Translate('pansea') }}</b>
                     <md-badge class="md-square md-primary" :md-content="Translate('beta')" />
                 </md-toolbar>
-
-                <md-list>
+<!--just show if user has permission-->
+                <md-list  v-if="$auth.user().can['show-dashboard']">
                     <md-list-item to="/">
                         <md-icon>home</md-icon>
                         <span class="md-list-item-text">{{ Translate('dashboard') }}</span>
@@ -38,7 +38,7 @@
                         <span class="md-list-item-text">{{ Translate('projects') }}</span>
 
                         <md-list slot="md-expand">
-                            <md-list-item v-if="$auth.user().roles[0].name == 'admin'" class="md-inset" to="/projects/add">{{ Translate('add') }}</md-list-item>
+                            <md-list-item v-if="$auth.user().can['insert-dashboard']" class="md-inset" to="/projects/add">{{ Translate('add') }}</md-list-item>
                             <md-list-item v-if="$auth.user().roles[0].name == 'admin' || $auth.user().roles[0].name == 'census' || $auth.user().roles[0].name == 'recipient'" class="md-inset" to="/projects">{{ Translate('list') }}</md-list-item>
                         </md-list>
                     </md-list-item>
@@ -53,7 +53,7 @@
                         <span class="md-list-item-text">{{ Translate('orders') }}</span>
 
                         <md-list slot="md-expand">
-                            <md-list-item v-if="$auth.user().roles[0].name == 'admin'" class="md-inset" to="/orders/add">{{ Translate('add') }}</md-list-item>
+                            <md-list-item v-if="$auth.user().can['insert-dashboard']" class="md-inset" to="/orders/add">{{ Translate('add') }}</md-list-item>
                             <md-list-item v-if="$auth.user().roles[0].name == 'admin' || $auth.user().roles[0].name == 'storage-observer'" class="md-inset" to="/orders">{{ Translate('list') }}</md-list-item>
                         </md-list>
                     </md-list-item>
@@ -68,7 +68,7 @@
                         <span class="md-list-item-text">{{ Translate('merchandises') }}</span>
 
                         <md-list slot="md-expand">
-                            <md-list-item v-if="$auth.user().roles[0].name == 'admin'" class="md-inset" to="/merchandises/add">{{ Translate('add') }}</md-list-item>
+                            <md-list-item v-if="$auth.user().can['insert-dashboard']" class="md-inset" to="/merchandises/add">{{ Translate('add') }}</md-list-item>
                             <md-list-item v-if="$auth.user().roles[0].name == 'admin' || $auth.user().roles[0].name == 'census'" class="md-inset" to="/merchandises">{{ Translate('list') }}</md-list-item>
                         </md-list>
                     </md-list-item>
@@ -78,7 +78,7 @@
                         <span class="md-list-item-text">{{ Translate('locations') }}</span>
 
                         <md-list slot="md-expand">
-                            <md-list-item class="md-inset" to="/locations/add">{{ Translate('add') }}</md-list-item>
+                            <md-list-item class="md-inset" to="/locations/add" v-if="$auth.user().can['insert-dashboard']">{{ Translate('add') }}</md-list-item>
                             <md-list-item class="md-inset" to="/locations">{{ Translate('list') }}</md-list-item>
                         </md-list>
                     </md-list-item>
@@ -88,7 +88,7 @@
                         <span class="md-list-item-text">{{ Translate('cities') }}</span>
 
                         <md-list slot="md-expand">
-                            <md-list-item class="md-inset" to="/cities/add">{{ Translate('add') }}</md-list-item>
+                            <md-list-item class="md-inset" to="/cities/add" v-if="$auth.user().can['insert-dashboard']">{{ Translate('add') }}</md-list-item>
                             <md-list-item class="md-inset" to="/cities">{{ Translate('list') }}</md-list-item>
                         </md-list>
                     </md-list-item>
@@ -98,7 +98,7 @@
                         <span class="md-list-item-text">{{ Translate('countries') }}</span>
 
                         <md-list slot="md-expand">
-                            <md-list-item class="md-inset" to="/countries/add">{{ Translate('add') }}</md-list-item>
+                            <md-list-item class="md-inset" to="/countries/add" v-if="$auth.user().can['insert-dashboard']">{{ Translate('add') }}</md-list-item>
                             <md-list-item class="md-inset" to="/countries">{{ Translate('list') }}</md-list-item>
                         </md-list>
                     </md-list-item>
@@ -108,7 +108,7 @@
                         <span class="md-list-item-text">{{ Translate('vehicles') }}</span>
 
                         <md-list slot="md-expand">
-                            <md-list-item class="md-inset" to="/vehicles/add">{{ Translate('add') }}</md-list-item>
+                            <md-list-item class="md-inset" to="/vehicles/add" v-if="$auth.user().can['insert-dashboard']">{{ Translate('add') }}</md-list-item>
                             <md-list-item class="md-inset" to="/vehicles">{{ Translate('list') }}</md-list-item>
                         </md-list>
                     </md-list-item>
@@ -118,7 +118,7 @@
                         <span class="md-list-item-text">{{ Translate('packages') }}</span>
 
                         <md-list slot="md-expand">
-                            <md-list-item class="md-inset" to="/packages/add">{{ Translate('add') }}</md-list-item>
+                            <md-list-item class="md-inset" to="/packages/add" v-if="$auth.user().can['insert-dashboard']">{{ Translate('add') }}</md-list-item>
                             <md-list-item class="md-inset" to="/packages">{{ Translate('list') }}</md-list-item>
                         </md-list>
                     </md-list-item>
@@ -127,7 +127,7 @@
                         <md-icon>bubble_chart</md-icon>
                         <span class="md-list-item-text">{{ Translate('sizes') }}</span>
                         <md-list slot="md-expand">
-                            <md-list-item class="md-inset" to="/sizes/add">{{ Translate('add') }}</md-list-item>
+                            <md-list-item class="md-inset" to="/sizes/add" v-if="$auth.user().can['insert-dashboard']">{{ Translate('add') }}</md-list-item>
                             <md-list-item class="md-inset" to="/sizes">{{ Translate('list') }}</md-list-item>
                         </md-list>
                     </md-list-item>
@@ -137,7 +137,7 @@
                         <span class="md-list-item-text">{{ Translate('weights') }}</span>
 
                         <md-list slot="md-expand">
-                            <md-list-item class="md-inset" to="/weights/add">{{ Translate('add') }}</md-list-item>
+                            <md-list-item class="md-inset" to="/weights/add" v-if="$auth.user().can['insert-dashboard']">{{ Translate('add') }}</md-list-item>
                             <md-list-item class="md-inset" to="/weights">{{ Translate('list') }}</md-list-item>
                         </md-list>
                     </md-list-item>
@@ -147,7 +147,7 @@
                         <span class="md-list-item-text">{{ Translate('grades') }}</span>
 
                         <md-list slot="md-expand">
-                            <md-list-item class="md-inset" to="/grades/add">{{ Translate('add') }}</md-list-item>
+                            <md-list-item class="md-inset" to="/grades/add" v-if="$auth.user().can['insert-dashboard']">{{ Translate('add') }}</md-list-item>
                             <md-list-item class="md-inset" to="/grades">{{ Translate('list') }}</md-list-item>
                         </md-list>
                     </md-list-item>
@@ -157,19 +157,19 @@
                         <span class="md-list-item-text">{{ Translate('aquatics') }}</span>
 
                         <md-list slot="md-expand">
-                            <md-list-item class="md-inset" to="/aquatics/add">{{ Translate('add') }}</md-list-item>
+                            <md-list-item class="md-inset" to="/aquatics/add" v-if="$auth.user().can['insert-dashboard']">{{ Translate('add') }}</md-list-item>
                             <md-list-item class="md-inset" to="/aquatics">{{ Translate('list') }}</md-list-item>
                         </md-list>
                     </md-list-item>
 
-                    <md-list-item md-expand v-if="$auth.user().can['users']">
+                    <md-list-item md-expand v-if="$auth.user().can['show-dashboard']">
                         <md-icon>group</md-icon>
                         <span class="md-list-item-text">{{ Translate('users') }}</span>
                         <md-list slot="md-expand">
-                            <md-list-item class="md-inset" to="/users/add">{{ Translate('add') }}</md-list-item>
+                            <md-list-item class="md-inset" to="/users/add" v-if="$auth.user().can['insert-dashboard']">{{ Translate('add') }}</md-list-item>
                             <md-list-item class="md-inset" to="/users">{{ Translate('list') }}</md-list-item>
                             <md-list-item class="md-inset" to="/roles">نقش‌ها</md-list-item>
-                            <md-list-item class="md-inset" to="/permissions">سطح دسترسی ها</md-list-item>
+                            <!--<md-list-item class="md-inset" to="/permissions">سطح دسترسی ها</md-list-item>-->
                         </md-list>
                     </md-list-item>
 
