@@ -36,6 +36,14 @@ import Users from '../views/Admin/Users/List.vue'
 import UsersAdd from '../views/Admin/Users/Add.vue'
 import UsersEdit from '../views/Admin/Users/Edit.vue'
 
+import Roles from '../views/Admin/Roles/List.vue'
+import RolesAdd from '../views/Admin/Roles/Add.vue'
+import RolesEdit from '../views/Admin/Roles/Edit.vue'
+
+import Permissions from '../views/Admin/Permissions/List.vue'
+import PermissionsEdit from '../views/Admin/Permissions/Edit.vue'
+import Permissionsdd from '../views/Admin/Permissions/Add.vue'
+
 import Sizes from '../views/Admin/Sizes/List.vue'
 import SizesAdd from '../views/Admin/Sizes/Add.vue'
 import SizesEdit from '../views/Admin/Sizes/Edit.vue'
@@ -518,6 +526,31 @@ export default new Router({
             path: '/users/:hashid',
             name: 'users.edit',
             component: UsersEdit,
+            meta: {
+                auth: true
+            }
+        },
+
+        {
+            path: '/roles',
+            name: 'roles',
+            component: Roles,
+            meta: {
+                auth: true
+            }
+        },
+        {
+            path: '/roles/add/:hashid?',
+            name: 'roles.add',
+            component: RolesAdd,
+            meta: {
+                auth: true
+            }
+        },
+        {
+            path: '/roles/:hashid?',
+            name: 'roles.edit',
+            component: RolesEdit,
             meta: {
                 auth: true
             }

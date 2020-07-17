@@ -22,7 +22,7 @@
 
                         <md-field>
                             <label>{{ Translate('mobile') }}</label>
-                            <md-input v-model="user.mobile"></md-input>
+                            <md-input vcheckForToken-model="user.mobile"></md-input>
                         </md-field>
 
                         <md-field>
@@ -81,9 +81,9 @@ export default {
             email: '',
             mobile: '',
             password: '',
-            roles: {
-                id: '',
-            },
+            roles: [{
+                id: 0
+            }],
             metadatas: {
                 name: '',
                 locale: '',

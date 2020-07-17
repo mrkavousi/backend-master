@@ -1,16 +1,17 @@
 <?php
-
+Route::group(['prefix' => 'projects'], function () {
+    Route::any('{all?}', 'Project\ProjectController@adminIndex')->where('all', '.*')->name('admin.projects');
+});
 // Admin Panel
-Route::group(['middleware' => ['locale'], 'domain' => env('ADMIN_SUBDOMAIN') . '.' . env('APP_DOMAIN') . '.' . env('APP_TLD')], function () {
-
+/*Route::group(['middleware' => ['locale'], 'domain' => env('ADMIN_SUBDOMAIN') . '.' . env('APP_DOMAIN') . '.' . env('APP_TLD')], function () {*/
     Route::get('/login', 'Admin\AdminController@index')->name('admin.login');
 
     Route::get('/', 'Admin\AdminController@index')->name('admin.home');
 
     // Projects
-    Route::group(['prefix' => 'projects'], function () {
+   /* Route::group(['prefix' => 'projects'], function () {
         Route::any('{all?}', 'Project\ProjectController@adminIndex')->where('all', '.*')->name('admin.projects');
-    });
+    });*/
     // --------------------
 
     // Processes
@@ -91,4 +92,16 @@ Route::group(['middleware' => ['locale'], 'domain' => env('ADMIN_SUBDOMAIN') . '
     });
     // --------------------
 
-});
+     // Roles
+    Route::group(['prefix' => 'roles'], function () {
+        Route::any('{all?}', 'Role\RoleController@adminIndex')->where('all', '.*')->name('admin.roles');
+    });
+    // --------------------
+
+    // Permissions
+    Route::group(['prefix' => 'permissions'], function () {
+        Route::any('{all?}', 'Permission\PermissionController@adminIndex')->where('all', '.*')->name('admin.permissions');
+    });
+// --------------------
+
+/*});*/
