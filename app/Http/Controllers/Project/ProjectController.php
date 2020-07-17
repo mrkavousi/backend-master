@@ -175,7 +175,6 @@ class ProjectController extends Controller
         $project->description = $request->description;
 
         $project->save();
-
         if ($project->id) {
 
             // Add Metadata

@@ -33,15 +33,15 @@ class RoleController extends Controller
         $role->description = $request->input('description');
         $role->save();
         //attach the selected permissions
-
-        foreach ($request->input('permissions') as $key => $value) {
-            $valuePerm = array_filter($value,'strlen');
-
-            if($valuePerm != null){
-                $role->attachPermission($valuePerm);
+        if ($role->id) {
+            foreach ($request->input('permissions') as $key => $value) {
+                dd($valuePerm);
+                $valuePerm = array_filter($value, 'strlen');
+                if ($valuePerm != null) {
+                    $role->attachPermission($valuePerm);
+                }
             }
         }
-
         return $role;
     }
 

@@ -6,20 +6,23 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Http\Requests\RegisterUserRequest;
-use JWTAuth;
-use Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function login(Request $request)
     {
+
         if (isMobile($request->user))
             $credentials = ['mobile' => $request->user, 'password' => $request->password];
 
         if (filter_var($request->user, FILTER_VALIDATE_EMAIL))
             $credentials = ['email' => $request->user, 'password' => $request->password];
-        
-        if (!$token = JWTAuth::attempt($credentials)) {
+        $user = User::first();
+        $token = JWTAuth::fromUser($user);
+        $customClaims = ['foo' => 'bar', 'baz' => 'bob'];
+        if (!$token = JWTAuth::fromUser($user, $customClaims)) {
             return response([
                 'status' => 'error',
                 'error' => 'invalid.credentials',
