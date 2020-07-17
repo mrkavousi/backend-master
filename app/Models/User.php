@@ -9,6 +9,7 @@ use App\Traits\Metable;
 use App\Traits\HasRole;
 use Hashids;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Support\Facades\Gate as GateContract;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -25,7 +26,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'email', 'mobile', 'password',
+        'email', 'mobile', 'password','name'
     ];
 
     /**
@@ -39,7 +40,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function getHashidAttribute()
     {
-      //  return Hashids::connection('general')->encode($this->id);
+        return Hashids::connection('general')->encode($this->id);
     }
 
     public function getJWTIdentifier()
@@ -54,5 +55,8 @@ class User extends Authenticatable implements JWTSubject
             'role' => 'admin',
         ];
     }
-
+    public function getPermissionList()
+    {
+        return app(GateContract::class)->permissionsForUser($this);
+    }
 }

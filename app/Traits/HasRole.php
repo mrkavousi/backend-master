@@ -1,10 +1,14 @@
 <?php
 namespace App\Traits;
 
+use App\Models\Type;
+use App\Models\User;
 use App\Permission;
 use App\Role;
-use Auth;
 
+
+use Auth;
+use Illuminate\Http\Request;
 trait HasRole
 {
     /*public function rolesE()
@@ -37,7 +41,7 @@ trait HasRole
             if (Auth::user()->can($permission->name)) {
                 $permissions[trim($permission->name)] = true;
             } else {
-               // $permissions[$permission->name] = false;
+                $permissions[$permission->name] = false;
             }
         }
         return $permissions;
