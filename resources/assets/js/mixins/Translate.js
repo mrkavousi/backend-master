@@ -382,7 +382,7 @@ Vue.mixin({
                 'coordinate': 'نقطه مکانی',
                 'coordinate.example': 'مثال: 35.7211182,51.3907133',
                 'capacity': 'ظرفیت',
-                'add.location': 'افزودن مکان',
+                'add.locatzion': 'افزودن مکان',
             },
         }
     }),
@@ -394,7 +394,7 @@ Vue.mixin({
     methods: {
         Translate: function (translateKey, params) {
             var string = this.translations[this.locale][translateKey]
-    
+
             if (params)
                 for (const key in params) {
                     let value = params[key]

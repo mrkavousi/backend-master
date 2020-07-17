@@ -1,6 +1,6 @@
 <template>
     <form>
-        <div class="projects projects-add md-layout">
+        <div class="projects projects-add md-layout" >
             <div class="md-layout-item md-size-75 md-small-size-50 md-xsmall-size-100">
                 <md-card>
                     <md-card-content>

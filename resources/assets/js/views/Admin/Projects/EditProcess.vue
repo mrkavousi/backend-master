@@ -516,7 +516,7 @@ export default {
             }
         })
 
-        Vue.axios.get('types/?model=process&use_for=project').then((response) => {
+        Vue.axios.get('types/?model=process&use_for=project&for=edit').then((response) => {
             this.types = _.orderBy(response.data, 'name')
             if (this.$auth.user().roles[0].name == 'census') {
                 var typesForCensus = []

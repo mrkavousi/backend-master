@@ -12,7 +12,7 @@
         </md-table-toolbar>
 
         <md-table-empty-state>
-            <md-button class="md-primary md-raised" to="/projects/add">{{ Translate('add.new.project') }}</md-button>
+            <md-button class="md-primary md-raised" to="/projects/add" v-if="$auth.user().can['insert-dashboard']">{{ Translate('add.new.project') }}</md-button>
         </md-table-empty-state>
 
         <md-table-row slot="md-table-row" slot-scope="{ item }">
@@ -32,7 +32,7 @@
                 {{ item.updated_at | moment("from", "now") }}
             </md-table-cell>
             <md-table-cell md-label="">
-                <md-button class="md-icon-button md-primary" :to="'/projects/' + item.hashid">
+                <md-button v-if="$auth.user().can['edit-dashboard']" class="md-icon-button md-primary" :to="'/projects/' + item.hashid">
                     <md-icon>edit</md-icon>
                 </md-button>
             </md-table-cell>
