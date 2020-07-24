@@ -22,7 +22,7 @@ trait HasRole
 
     public function getAllPermissionsAttribute()
     {
-      //  return Permission::with('roles')->get();
+        return Permission::with('roles')->get();
     }
 
     /**
