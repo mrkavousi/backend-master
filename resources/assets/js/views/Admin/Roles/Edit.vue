@@ -63,21 +63,17 @@ import { mapMutations } from 'vuex'
 export default {
     data: () => ({
         role: {
-            email: '',
-            mobile: '',
-            password: '',
-            roles: [{
-                id: 0
-            }],
+            name: '',
+            display_name: '',
+            description: '',
+            permissions: {
+                id: '',
+            },
             metadatas: {
-                name: '',
                 locale: '',
-                phone: '',
-                address: ''
-            }
+            },
         },
-
-        roles: []
+        permissions: [],
     }),
 
     created() {
