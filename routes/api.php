@@ -251,8 +251,11 @@ use Illuminate\Http\Request;
             Route::get('/roles', 'Role\RoleController@adminList')->name('api.roles');
             // Add
             Route::post('/roles/add', 'Role\RoleController@store')->name('api.roles.add');
-            // -----
-
+            // Single
+             Route::get('/roles/{hashid}', 'Role\RoleController@adminSingle')->name('api.roles.single');
+             // Update
+             Route::put('/roles/{hashid}', 'Role\RoleController@adminUpdate')->name('api.roles.update');
+             // -----
             // --
             // Permissions
             // List
