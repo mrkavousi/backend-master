@@ -106,7 +106,7 @@ class UserController extends Controller
 
         if ($user->id) {
 
-            $user->roles()->sync([$request->roles[0]['id']]);
+            $user->roles()->sync([$request->roles['id']]);
 
             // Add Metadata
             foreach ($request->metadatas as $key => $value) {
