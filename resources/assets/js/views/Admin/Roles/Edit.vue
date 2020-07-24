@@ -48,7 +48,7 @@
                         
                     </md-card-content>
                     <md-card-actions>
-                        <md-button class="md-raised md-primary" @click="saveUser">{{ Translate('save') }}</md-button>
+                        <md-button class="md-raised md-primary" @click="saveRole">{{ Translate('save') }}</md-button>
                     </md-card-actions>
                 </md-card>
             </div>
@@ -69,11 +69,15 @@ export default {
             permissions: [{
                 id: 0
             }],
+            currentPermissions:[{
+                id: 0
+            }],
             metadatas: {
-                locale: '',
             },
         },
         permissions: [],
+        currentPermissions: [],
+
     }),
 
     created() {
@@ -89,14 +93,15 @@ export default {
         Vue.axios.get('roles/' + this.$route.params.hashid).then((response) => {
             this.role = response.data
             this.setPageTitle(this.Translate('edit.role', {'name': this.role.name}))
+
         })
 
-        this.setPermission(this.$route.params.projectHashid)
+        this.setPermission(this.$route.params.hashid)
 
     },
 
     methods: {
-        saveUser () {
+        saveRole () {
             Vue.axios.put('roles/' + this.$route.params.hashid, this.role)
                 .then((response) => {
                     this.setSnackbarText(this.Translate('role.updated.successfully'))
@@ -107,11 +112,9 @@ export default {
                 })
         },
         setPermission (hashid) {
-            if (hashid) {
-                Vue.axios.get('roles/' + hashid).then((response) => {
-                    this.permissions = response.data
-                })
-            }
+            this.currentPermissions = this.role.permissions.filter((proc) => {
+                    return proc
+            })
         },
 
         ...mapMutations([
