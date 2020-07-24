@@ -33,7 +33,7 @@ use Illuminate\Http\Request;
         // -----
 
         // AUTHENTICATED
-        // Route::group(['middleware' => 'jwt.auth'], function() {
+         Route::group(['middleware' => 'jwt.auth'], function() {
             
             // AUTH
             // User
@@ -277,7 +277,7 @@ use Illuminate\Http\Request;
             Route::put('/users/{hashid}', 'User\UserController@adminUpdate')->name('api.users.update');
             // -----
 
-        // });
+         });
 
     });
 
