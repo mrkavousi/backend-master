@@ -22,7 +22,7 @@
 
                         <md-field v-if="permissions">
                             <label for="permissions">{{ Translate('role') }}</label>
-                            <md-select v-model="role.permissions.id" id="permissions" multiple>
+                            <md-select v-model="role.hashid" @md-selected="setPermission" id="permissions" multiple>
                                 <md-option v-for="permission in permissions" :key="permission.id" :value="permission.id">{{permission.display_name}}</md-option>
                             </md-select>
                         </md-field>
@@ -66,9 +66,9 @@ export default {
             name: '',
             display_name: '',
             description: '',
-            permissions: {
-                id: '',
-            },
+            permissions: [{
+                id: 0
+            }],
             metadatas: {
                 locale: '',
             },
@@ -91,6 +91,8 @@ export default {
             this.setPageTitle(this.Translate('edit.role', {'name': this.role.name}))
         })
 
+        this.setPermission(this.$route.params.projectHashid)
+
     },
 
     methods: {
@@ -103,6 +105,13 @@ export default {
                 .catch((response) => {
 
                 })
+        },
+        setPermission (hashid) {
+            if (hashid) {
+                Vue.axios.get('roles/' + hashid).then((response) => {
+                    this.permissions = response.data
+                })
+            }
         },
 
         ...mapMutations([
