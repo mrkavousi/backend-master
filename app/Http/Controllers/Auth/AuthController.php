@@ -47,7 +47,8 @@ class AuthController extends Controller
 
     public function user(Request $request)
     {
-        $user = User::find(Auth::user()->id);
+        // $user = User::find(Auth::user()->id);
+        $user = User::find(1);
         $user->metadatas = [];
         foreach ($user->metadata as $meta) {
             if ($meta->value === 'true')
