@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Role;
 use App\Permission;
+use Hashids;
 
 class RoleController extends Controller
 {
@@ -17,6 +18,17 @@ class RoleController extends Controller
     public function adminList()
     {
         return Role::latest()->get();
+    }
+
+    public function adminSingle(Request $request, $hashid)
+    {
+        $roleId = Hashids::connection('general')->decode($hashid);
+        $roleId = $roleId[0];
+        $role = Role::findOrFail($roleId);
+        $role->permisions = $role->permission()->orderby('name')->get();
+
+
+        return $role;
     }
 
     public function store(Request $request)
