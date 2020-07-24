@@ -20,10 +20,10 @@
                             <md-input v-model="role.description"></md-input>
                         </md-field>
 
-                        <md-field v-if="roles">
-                            <label for="roles">{{ Translate('role') }}</label>
-                            <md-select v-model="role.roles[0].id" id="roles">
-                                <md-option v-for="role in roles" :key="role.id" :value="role.id">{{role.display_name}}</md-option>
+                        <md-field v-if="permissions">
+                            <label for="permissions">{{ Translate('role') }}</label>
+                            <md-select v-model="role.permissions.id" id="permissions" multiple>
+                                <md-option v-for="permission in permissions" :key="permission.id" :value="permission.id">{{permission.display_name}}</md-option>
                             </md-select>
                         </md-field>
 
@@ -78,8 +78,12 @@ export default {
 
     created() {
 
-        Vue.axios.get('roles').then((response) => {
+        /*Vue.axios.get('roles').then((response) => {
             this.roles = response.data
+        })*/
+
+        Vue.axios.get('permissions').then((response) => {
+            this.permissions = response.data
         })
 
         Vue.axios.get('roles/' + this.$route.params.hashid).then((response) => {
