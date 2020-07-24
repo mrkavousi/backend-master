@@ -25,7 +25,7 @@ class RoleController extends Controller
         $roleId = Hashids::connection('general')->decode($hashid);
         $roleId = $roleId[0];
         $role = Role::findOrFail($roleId);
-        $role->permisions = $role->permission()->orderby('name')->get();
+        $role->permissions = $role->permission()->orderby('name')->get();
 
         $role->metadatas = [];
 
