@@ -27,6 +27,7 @@ class RoleController extends Controller
         $role = Role::findOrFail($roleId);
         $role->permisions = $role->permission()->orderby('name')->get();
 
+        $role->metadatas = [];
 
         return $role;
     }
