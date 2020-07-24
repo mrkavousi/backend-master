@@ -20,6 +20,8 @@ class TypeController extends Controller
     {
        // $user = User::find(Auth::user()->id);
         $user = User::find(1);
+        $list = array();
+
         $userPermissions = $user->getPermissionList();
         if($userPermissions){
             foreach ($userPermissions as $userPermission){
@@ -35,12 +37,20 @@ class TypeController extends Controller
                 }
             }
         }
-        if ($request->has('model') && $request->has('use_for')) {
+
+        if ($request->has('model') && $request->has('use_for') && $request->has('for')) {
             $types = Type::where('typeable_type', 'App\Models\\' . ucfirst($request->model))
                 ->whereHas('Models', function ($query) use ($request) {
                     $query->where('model', '=', 'App\Models\\' . ucfirst($request->use_for));
                 })
                 ->whereIn('slug', $list)
+                ->latest()
+                ->get();
+        } elseif ($request->has('model') && $request->has('use_for')) {
+            $types = Type::where('typeable_type', 'App\Models\\' . ucfirst($request->model))
+                ->whereHas('Models', function ($query) use ($request) {
+                    $query->where('model', '=', 'App\Models\\' . ucfirst($request->use_for));
+                })
                 ->latest()
                 ->get();
         } elseif ($request->has('model')) {
