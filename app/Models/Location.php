@@ -43,4 +43,9 @@ class Location extends Model
     {
         return Hashids::connection('general')->encode($this->id);
     }
+
+    public function processes()
+    {
+        return $this->hasMany('App\Models\Process', 'processable_id');
+    }
 }
