@@ -166,6 +166,93 @@
                         </div>
                     </div>
                 </md-tab>
+                <md-tab v-if="$auth.user().roles[0].name == 'admin'" id="tab-edit" :md-label="Translate('edit.location')">
+                    <div class="md-layout">
+                        <div class="md-layout-item md-size-75 md-small-size-50 md-xsmall-size-100">
+                            <br v-if="location.type.id === 12">
+
+                            <md-card>
+                                <md-card-content>
+
+                                    <md-field v-if="cities">
+                                        <label for="cities">{{ Translate('city') }}</label>
+                                        <md-select v-model="location.city.id" id="cities">
+                                            <md-option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</md-option>
+                                        </md-select>
+                                    </md-field>
+
+                                    <md-field v-if="locations">
+                                        <label for="locations">{{ Translate('parent.location') }}</label>
+                                        <md-select v-model="location.parent.id" id="locations">
+                                            <md-option v-for="location in locations" :key="location.id" :value="location.id">{{location.name}}</md-option>
+                                        </md-select>
+                                        <span class="md-helper-text">{{ Translate('optional') }}</span>
+                                    </md-field>
+
+                                    <md-field v-if="types">
+                                        <label for="locationType">{{ Translate('location.type') }}</label>
+                                        <md-select v-model="location.type.id" id="locationType">
+                                            <md-option v-for="type in types" :key="type.id" :value="type.id">{{type.name}}</md-option>
+                                        </md-select>
+                                    </md-field>
+
+                                    <md-field>
+                                        <label>{{ Translate('name') }}</label>
+                                        <md-input v-model="location.name"></md-input>
+                                    </md-field>
+
+                                    <md-field>
+                                        <label>{{ Translate('coordinate') }}</label>
+                                        <md-input v-model="location.metadatas.coordinate"></md-input>
+                                        <span class="md-helper-text">{{ Translate('optional') }}. {{ Translate('coordinate.example') }}</span>
+                                    </md-field>
+
+                                    <md-field v-if="location.type.id == 12 || location.type.id == 13">
+                                        <label>{{ Translate('capacity') }}</label>
+                                        <md-input v-model="location.metadatas.capacity"></md-input>
+                                    </md-field>
+
+                                    <md-field v-if="location.type.id == 13">
+                                        <label>Harvesting at</label>
+                                        <md-input v-model="location.metadatas.harvesting_at" id="harvestingAt"></md-input>
+                                    </md-field>
+
+                                    <md-field v-if="location.type.id == 13">
+                                        <label>Feed Time</label>
+                                        <md-input v-model="location.metadatas.feed_time_per_day"></md-input>
+                                        <span class="md-suffix">Per Day</span>
+                                    </md-field>
+
+                                    <md-field v-if="location.type.id == 15">
+                                        <label>No. of Tunnels</label>
+                                        <md-input v-model="location.metadatas.tunnels_count"></md-input>
+                                    </md-field>
+
+                                    <md-field>
+                                        <label>{{ Translate('description') }}</label>
+                                        <md-textarea v-model="location.description"></md-textarea>
+                                        <span class="md-helper-text">{{ Translate('optional') }}</span>
+                                    </md-field>
+
+                                </md-card-content>
+                            </md-card>
+                        </div>
+
+                        <div class="md-layout-item md-size-25 md-small-size-50 md-xsmall-size-100">
+                            <md-card class="card-publish">
+                                <md-card-header>
+                                    <div class="md-subhead">{{ Translate('save.publish') }}</div>
+                                </md-card-header>
+                                <md-card-content>
+
+                                </md-card-content>
+                                <md-card-actions>
+                                    <md-button class="md-raised md-primary" @click="saveLocation">{{ Translate('save') }}</md-button>
+                                </md-card-actions>
+                            </md-card>
+                        </div>
+                    </div>
+                </md-tab>
 
             </md-tabs>
 
