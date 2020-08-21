@@ -31,7 +31,7 @@
 
                         <md-field v-if="location">
                             <label for="processable">{{ Translate('location') }}</label>
-                            <md-select v-model="location.hashid" @md-selected="setProject" id="processable">
+                            <md-select v-model="location.hashid" @md-selected="setLocation" id="processable">
                                 <md-option v-for="m in locations" :key="m.id" :value="m.hashid">{{m.name}}</md-option>
                             </md-select>
                         </md-field>
@@ -491,7 +491,7 @@ export default {
         unloads: [],
         frosts: [],
         types: [],
-        locations: [],
+    //    locations: [],
         vehicles: [],
         drivers: [],
         packages: [],
@@ -600,7 +600,7 @@ export default {
             this.grades = response.data
         })
 
-        this.setProject(this.$route.params.locationHashid)
+        this.setLocation(this.$route.params.locationHashid)
 
     },
 
@@ -617,7 +617,7 @@ export default {
                 })
         },
 
-        setProject (locationHashid) {
+        setLocation (locationHashid) {
             if (locationHashid) {
                 Vue.axios.get('locations/' + locationHashid).then((response) => {
                     this.location = response.data
