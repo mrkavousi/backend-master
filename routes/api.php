@@ -66,7 +66,7 @@ use Illuminate\Http\Request;
             // Single
             Route::get('/processes/{hashid}', 'Process\ProcessController@adminSingle')->name('api.processes.single');
             // Update
-            Route::put('/processes/{hashid}', 'Process\ProcessController@adminUpdate')->name('api.processes.update');
+            Route::put('/processes/{hashid}', 'processes/addProcess\ProcessController@adminUpdate')->name('api.processes.update');
             // -----
 
             // Notes
@@ -169,9 +169,16 @@ use Illuminate\Http\Request;
             Route::put('/locations/{hashid}', 'Location\LocationController@adminUpdate')->name('api.locations.update');
             // Inventory
             Route::get('/locations/{hashid}/inventory', 'Location\StorageController@adminInventory')->name('api.locations.inventory');
-            // -----
+            // parentLocation
+            Route::get('/locations/parent', 'Location\LocationController@parentLocation')->name('api.locations.parent');
+             // -----
+             Route::get('/locations/{hashid}/reports/packages-summary', 'Location\LocationController@adminReportPackagesSummary')->name('api.admin.locations.reports.packages.summary');
 
-            // Aquatics
+             Route::get('/locations/{hashid}/{type}', 'Location\LocationController@adminProcessesByType')->name('api.locations.processes.by.type');
+
+
+
+             // Aquatics
             // --
             // List
             Route::get('/aquatics', 'Aquatic\AquaticController@adminList')->name('api.aquatics');
