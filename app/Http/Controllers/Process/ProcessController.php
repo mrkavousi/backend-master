@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Process;
 
+use App\Models\Location;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Process;
@@ -39,6 +40,8 @@ class ProcessController extends Controller
                 $processable = Project::findOrFail($processableId);
             if ($request->has('model') == 'merchandise')
                 $processable = Merchandise::findOrFail($processableId);
+            if ($request->has('model') == 'location')
+                $processable = Location::findOrFail($processableId);
         }
 
         $process->metadatas = [];
@@ -58,13 +61,16 @@ class ProcessController extends Controller
     public function adminAdd(Request $request)
     {
         if ($request->has('model') && $request->has('processable')) {
-            $processableId = Hashids::connection('general')->decode($request->processable); $processableId = $processableId[0];
+            $processableId = Hashids::connection('general')->decode($request->processable);
+            $processableId = $processableId[0];
             if ($request->model == 'project')
                 $processable = Project::findOrFail($processableId);
             if ($request->model == 'merchandise')
                 $processable = Merchandise::findOrFail($processableId);
+            if ($request->model == 'location')
+                $processable = Location::findOrFail($processableId);
         }
-        
+
         if ($processable) {
 
             $process = new Process;
@@ -132,6 +138,9 @@ class ProcessController extends Controller
 
                 Cache::forget('projects');
                 Cache::forget('project' . $request->processable);
+
+                Cache::forget('locations');
+                Cache::forget('location' . $request->processable);
     
                 return $process;
     
@@ -219,6 +228,9 @@ class ProcessController extends Controller
 
                 Cache::forget('projects');
                 Cache::forget('project' . $request->processable);
+
+                Cache::forget('locations');
+                Cache::forget('location' . $request->processable);
 
                 return $process;
 
