@@ -14,7 +14,7 @@ class Location extends Model
 
     protected $appends = ['hashid'];
 
-    protected $with = ['city', 'parent', 'type'];
+    protected $with = ['city', 'parent', 'type', 'processes'];
 
     public function inventories()
     {
