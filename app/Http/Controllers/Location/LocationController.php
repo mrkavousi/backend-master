@@ -20,6 +20,14 @@ class LocationController extends Controller
         return Location::filter()->latest()->get();
     }
 
+    public function adminListPage()
+    {
+
+        return Location::latest()->paginate(50);
+
+        return $projects;
+    }
+
     public function adminSingle(Request $request, $hashid)
     {
         $locationId = Hashids::connection('general')->decode($hashid);
