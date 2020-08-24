@@ -15,7 +15,7 @@
                             <md-button :to="'/projects/' + project.hashid" class="md-light">{{project.name}}</md-button>
                         </span>
                         
-                        <md-badge v-if="!project.done" class="md-primary md-square ml-2 blinking" :md-content="Translate('processing')" />
+                        <md-badge v-if="!project.done" class="md-primary md-square ml-2 blinking" :md-content="Translate('process')" />
                         <md-badge v-if="project.done" class="md-green md-square ml-2" :md-content="Translate('done')" />
 
                         <md-button :to="'/projects/' + project.hashid + '/processes/add'" class="md-icon-button md-list-action">
@@ -29,6 +29,37 @@
             <md-card-actions>
                 <md-button v-if="$auth.user().roles[0].name == 'admin'" to="/projects/add">{{ Translate('add') }}</md-button>
                 <md-button to="/projects">{{ Translate('manage.all') }}</md-button>
+            </md-card-actions>
+        </md-card>
+        <md-card v-if="$auth.user().roles[0].name == 'admin' || $auth.user().roles[0].name == 'census' || $auth.user().roles[0].name == 'storage-observer' || $auth.user().roles[0].name == 'recipient'" class="md-dark mb-4">
+            <md-card-header>
+                <md-card-header-text>
+                    <div class="md-title">{{ Translate('locations') }}</div>
+                    <div class="md-subhead">{{ Translate('latest.active.locations') }}</div>
+                </md-card-header-text>
+            </md-card-header>
+
+            <md-card-content>
+                <md-list>
+                    <md-list-item v-for="(location, index) in locations" :key="index">
+                        <span class="md-list-item-text">
+                            <md-button :to="'/locations/' + location.hashid" class="md-light">{{location.name}}</md-button>
+                        </span>
+
+                        <md-badge v-if="!project.done" class="md-primary md-square ml-2 blinking" :md-content="Translate('process')" />
+                        <md-badge v-if="project.done" class="md-green md-square ml-2" :md-content="Translate('done')" />
+
+                        <md-button :to="'/locations/' + location.hashid + '/processes/add'" class="md-icon-button md-list-action">
+                            <md-icon class="md-light">add</md-icon>
+                            <md-tooltip md-direction="top">{{ Translate('add.process') }}</md-tooltip>
+                        </md-button>
+                    </md-list-item>
+                </md-list>
+            </md-card-content>
+
+            <md-card-actions>
+                <md-button v-if="$auth.user().roles[0].name == 'admin'" to="/locations/add">{{ Translate('add') }}</md-button>
+                <md-button to="/locations">{{ Translate('manage.all') }}</md-button>
             </md-card-actions>
         </md-card>
 
@@ -93,6 +124,7 @@ export default {
     },
     data: () => ({
         projects: [],
+        locations: [],
         orders: [],
     }),
 
@@ -104,6 +136,10 @@ export default {
         
         Vue.axios.get('projects').then((response) => {
             this.projects = response.data.data.slice(0, 3)
+        })
+
+        Vue.axios.get('locationsAdmin').then((response) => {
+            this.locations = response.data.data.slice(0, 3)
         })
 
         Vue.axios.get('orders').then((response) => {
