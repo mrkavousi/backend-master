@@ -46,9 +46,6 @@
                             <md-button :to="'/locations/' + location.hashid" class="md-light">{{location.name}}</md-button>
                         </span>
 
-                        <md-badge v-if="!project.done" class="md-primary md-square ml-2 blinking" :md-content="Translate('process')" />
-                        <md-badge v-if="project.done" class="md-green md-square ml-2" :md-content="Translate('done')" />
-
                         <md-button :to="'/locations/' + location.hashid + '/processes/add'" class="md-icon-button md-list-action">
                             <md-icon class="md-light">add</md-icon>
                             <md-tooltip md-direction="top">{{ Translate('add.process') }}</md-tooltip>
