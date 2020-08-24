@@ -31,7 +31,7 @@
 
                         <md-field v-if="location">
                             <label for="processable">{{ Translate('location') }}</label>
-                            <md-select v-model="location.hashid" @md-selected="setLocation" id="processable">
+                            <md-select v-model="location.hashid" @md-selected="setProject" id="processable">
                                 <md-option v-for="m in locations" :key="m.id" :value="m.hashid">{{m.name}}</md-option>
                             </md-select>
                         </md-field>
@@ -43,20 +43,6 @@
                                 <md-option v-for="location in locations" :key="location.id" :value="location.id">{{location.name}}</md-option>
                             </md-select>
                         </md-field> -->
-
-                        <md-field v-if="process.type.id == 1 || process.type.id == 4 || process.type.id == 5 || process.type.id == 6 || process.type.id == 7 || process.type.id == 8 || process.type.id == 24">
-                            <label for="location">{{ Translate('current.location') }}</label>
-                            <md-select v-model="process.location.id" id="location">
-                                <md-option v-for="location in locations" :key="location.id" :value="location.id">{{location.name}}</md-option>
-                            </md-select>
-                        </md-field>
-
-                        <md-field v-if="process.type.id == 1">
-                            <label for="to">{{ Translate('to') }}</label>
-                            <md-select v-model="process.to.id" id="to">
-                                <md-option v-for="location in locations" :key="location.id" :value="location.id">{{location.name}}</md-option>
-                            </md-select>
-                        </md-field>
 
                         <md-field v-if="process.type.id == 1">
                             <label for="vehicle">{{ Translate('vehicle') }}</label>
@@ -72,19 +58,13 @@
                             </md-select>
                         </md-field>
 
-
-                        <md-field v-if="process.type.id == 34 || process.type.id == 35">
-                            <label for="tunnel">{{ Translate('tunnel') }}</label>
-                            <md-select v-model="process.location.id" id="tunnel">
-                                <md-option v-for="location in locations" :key="location.id" :value="location.id">{{location.name}}</md-option>
-                            </md-select>
-                        </md-field>
+                        
 
                         <md-field v-if="process.type.id == 34">
                             <label>{{ Translate('pallet') }}</label>
                             <md-input v-model="process.metadatas.pallet"></md-input>
                         </md-field>
-                        
+
                         <md-field v-if="process.type.id == 34">
                             <label>{{ Translate('trolley') }}</label>
                             <md-input v-model="process.metadatas.trolley"></md-input>
@@ -269,7 +249,7 @@
                                     <md-input v-model="pack.pivot.floor"></md-input>
                                     <span class="md-helper-text">Optional</span>
                                 </md-field>
-                                
+
                                 <md-field class="md-layout-item md-size-40">
                                     <label>{{ Translate('package') }}</label>
                                     <md-select v-model="pack.id">
@@ -318,23 +298,17 @@
                                         <md-option v-for="unload in unloads" :key="unload.id" :value="unload.id">{{unload.metadatas.name || 'Untitled'}} ({{unload.hashid}})</md-option>
                                     </md-select>
                                 </md-field>
-
-                                <md-field class="md-layout-item md-size-20 md-small-size-30">
-                                    <label for="storage">{{ Translate('storage') }}</label>
-                                    <md-select v-model="pack.pivot.storage_id" id="storage">
-                                        <md-option v-for="location in locations" :key="location.id" :value="location.id">{{location.name}}</md-option>
-                                    </md-select>
-                                </md-field>
+                                
 
                                 <div class="md-layout-item md-size-10 md-small-size-10">
                                     <md-button class="md-icon-button md-dense md-primary" @click="removePackage(index)">
                                         <md-icon>close</md-icon>
                                     </md-button>
                                 </div>
-                                
+
                             </div>
                         </div>
-                        
+
 
                         <md-button v-if="process.type.id == 7 || process.type.id == 8 || process.type.id == 34  || process.type.id == 35" class="md-primary m-0 mb-3" @click="addAnotherPackage">
                             <md-icon>add</md-icon>
@@ -347,7 +321,7 @@
                             <md-textarea v-model="process.metadatas.description"></md-textarea>
                             <span class="md-helper-text">{{ Translate('optional') }}</span>
                         </md-field>
-                        
+
                     </md-card-content>
                 </md-card>
             </div>
@@ -383,61 +357,243 @@
         </div>
 
         <date-picker
-            v-model="process.metadatas.done_at"
-            type="datetime"
-            element="doneAt"
-            :show="dateTimePickerShow"
-            @close="dateTimePickerShow=false">
+                v-model="process.metadatas.done_at"
+                type="datetime"
+                element="doneAt"
+                :show="dateTimePickerShow"
+                @close="dateTimePickerShow=false">
         </date-picker>
 
         <date-picker
-            v-model="process.metadatas.started_at"
-            type="datetime"
-            element="startedAt"
-            :show="startedAtDateTimePickerShow"
-            @close="startedAtDateTimePickerShow=false">
+                v-model="process.metadatas.started_at"
+                type="datetime"
+                element="startedAt"
+                :show="startedAtDateTimePickerShow"
+                @close="startedAtDateTimePickerShow=false">
         </date-picker>
 
         <date-picker
-            v-model="process.metadatas.ended_at"
-            type="datetime"
-            element="endedAt"
-            :show="endedAtDateTimePickerShow"
-            @close="endedAtDateTimePickerShow=false">
+                v-model="process.metadatas.ended_at"
+                type="datetime"
+                element="endedAt"
+                :show="endedAtDateTimePickerShow"
+                @close="endedAtDateTimePickerShow=false">
         </date-picker>
 
     </form>
 </template>
 
 <script>
-import Vue from 'vue'
-import { mapMutations } from 'vuex'
+    import Vue from 'vue'
+    import { mapMutations } from 'vuex'
 
-var _ = require('lodash')
+    var _ = require('lodash')
 
-export default {
-    data: () => ({
-        process: {
-            type: {
-                id: 0
+    export default {
+        data: () => ({
+            process: {
+                type: {
+                    id: 0
+                },
+                from: {
+                    id: 0
+                },
+                to: {
+                    id: 0
+                },
+                vehicle: {
+                    id: 0
+                },
+                driver: {
+                    id: 0
+                },
+                location: {
+                    id: 0
+                },
+                packages: [
+                    {
+                        id: 0,
+                        pivot: {
+                            quantity: 0,
+                            floor: null,
+                            unload_id: null,
+                            storage_id: null
+                        }
+                    }
+                ],
+                metadatas: {
+                    name: null,
+                    description: null,
+                    total_weight: '',
+                    basket_quantity: null,
+                    unilit_quantity: null,
+                    color: null,
+                    temprature: '',
+                    duration: '',
+                    black_spot: null,
+                    red_head: null,
+                    half_soft_shell: null,
+                    soft_shell: null,
+                    weight_2big: null,
+                    weight_10small: null,
+                    weight_2kg_after_2min_water_washing: null,
+                    no_in_1kg: null,
+                    no_total_2kg_basket: null,
+                    male_count: null,
+                    female_count: null,
+                    send_process: null,
+                    delivery_process: null,
+                    unload_process: null,
+                    started_at: null,
+                    ended_at: null,
+                    done_at: null,
+                    size: null,
+                    grade: null,
+                    trolley: null,
+                    pallet: null,
+                    trolley_quantity: null,
+                    pallet_quantity: null,
+                    frost_process: null,
+                },
+                status: 0
             },
-            from: {
-                id: 0
+
+            locations: [],
+            location: null,
+            sends: [],
+            deliveries: [],
+            unloads: [],
+            frosts: [],
+            types: [],
+            vehicles: [],
+            drivers: [],
+            packages: [],
+            sizes: [],
+            grades: [],
+
+            dateTimePickerShow: false,
+            startedAtDateTimePickerShow: false,
+            endedAtDateTimePickerShow: false,
+        }),
+
+        created() {
+
+            this.setPageTitle(this.Translate('add.process'))
+
+            Vue.axios.get('types/?model=process&use_for=location&for=add').then((response) => {
+                this.types = _.orderBy(response.data, 'name')
+                if (this.$auth.user().roles[0].name == 'census') {
+                    var typesForCensus = []
+                    var typesProcessed = 0
+                    var self = this
+                    this.types.forEach(function (type, index, object) {
+                        typesProcessed++
+                        if (typesProcessed === self.types.length) {
+                            self.types = typesForCensus
+                        }
+                    })
+                }
+
+                if (this.$auth.user().roles[0].name == 'storage-observer') {
+                    var typesForStorageObserver = []
+                    var typesProcessed = 0
+                    var self = this
+                    this.types.forEach(function (type, index, object) {
+                        typesProcessed++
+                        if (type.id == 35) {
+                            typesForStorageObserver.push(type)
+                        }
+                        if (typesProcessed === self.types.length) {
+                            self.types = typesForStorageObserver
+                        }
+                    })
+                }
+
+                if (this.$auth.user().roles[0].name == 'recipient') {
+                    var typesForRecipient = []
+                    var typesProcessed = 0
+                    var self = this
+                    this.types.forEach(function (type, index, object) {
+                        typesProcessed++
+                        if (type.id == 1 || type.id == 2) {
+                            typesForRecipient.push(type)
+                        }
+                        if (typesProcessed === self.types.length) {
+                            self.types = typesForRecipient
+                        }
+                    })
+                }
+
+            })
+
+            Vue.axios.get('locations/' + this.$route.params.locationHashid + '/1').then((response) => {
+                this.sends = response.data
+            })
+
+            Vue.axios.get('locations/' + this.$route.params.locationHashid + '/2').then((response) => {
+                this.deliveries = response.data
+            })
+
+            Vue.axios.get('locations/' + this.$route.params.locationHashid + '/3').then((response) => {
+                this.unloads = response.data
+            })
+
+            Vue.axios.get('locations/' + this.$route.params.locationHashid + '/33').then((response) => {
+                this.frosts = response.data
+            })
+
+            Vue.axios.get('locationsAdmin').then((response) => {
+                this.locations = response.data.data
+            })
+            
+
+            Vue.axios.get('vehicles').then((response) => {
+                this.vehicles = response.data
+            })
+
+            Vue.axios.get('drivers').then((response) => {
+                this.drivers = response.data
+            })
+
+            Vue.axios.get('packages').then((response) => {
+                this.packages = response.data
+            })
+
+            Vue.axios.get('sizes').then((response) => {
+                this.sizes = response.data
+            })
+
+            Vue.axios.get('grades').then((response) => {
+                this.grades = response.data
+            })
+
+            this.setProject(this.$route.params.locationHashid)
+
+        },
+
+        methods: {
+            saveProcess () {
+                Vue.axios.post('processes/add/?model=location&processable=' + this.location.hashid, this.process)
+                    .then((response) => {
+                        this.setSnackbarText('Process added successfully')
+                        this.setSnackbarShow(true)
+                        this.$router.push('/locations/' + this.location.hashid)
+                    })
+                    .catch((response) => {
+
+                    })
             },
-            to: {
-                id: 0
+
+            setProject (locationHashid) {
+                if (locationHashid) {
+                    Vue.axios.get('locations/' + locationHashid).then((response) => {
+                        this.location = response.data
+                    })
+                }
             },
-            vehicle: {
-                id: 0
-            },
-            driver: {
-                id: 0
-            },
-            location: {
-                id: 0
-            },
-            packages: [
-                {
+
+            addAnotherPackage () {
+                this.process.packages.push({
                     id: 0,
                     pivot: {
                         quantity: 0,
@@ -445,207 +601,18 @@ export default {
                         unload_id: null,
                         storage_id: null
                     }
-                }
-            ],
-            metadatas: {
-                name: null,
-                description: null,
-                total_weight: '',
-                basket_quantity: null,
-                unilit_quantity: null,
-                color: null,
-                temprature: '',
-                duration: '',
-                black_spot: null,
-                red_head: null,
-                half_soft_shell: null,
-                soft_shell: null,
-                weight_2big: null,
-                weight_10small: null,
-                weight_2kg_after_2min_water_washing: null,
-                no_in_1kg: null,
-                no_total_2kg_basket: null,
-                male_count: null,
-                female_count: null,
-                send_process: null,
-                delivery_process: null,
-                unload_process: null,
-                started_at: null,
-                ended_at: null,
-                done_at: null,
-                size: null,
-                grade: null,
-                trolley: null,
-                pallet: null,
-                trolley_quantity: null,
-                pallet_quantity: null,
-                frost_process: null,
+                })
             },
-            status: 0
+
+            removePackage (index) {
+                this.process.packages.splice(index, 1)
+            },
+
+            ...mapMutations([
+                'setPageTitle',
+                'setSnackbarText',
+                'setSnackbarShow',
+            ])
         },
-
-        locations: [],
-        location: null,
-        sends: [],
-        deliveries: [],
-        unloads: [],
-        frosts: [],
-        types: [],
-    //    locations: [],
-        vehicles: [],
-        drivers: [],
-        packages: [],
-        sizes: [],
-        grades: [],
-
-        dateTimePickerShow: false,
-        startedAtDateTimePickerShow: false,
-        endedAtDateTimePickerShow: false,
-    }),
-
-    created() {
-
-        this.setPageTitle(this.Translate('add.process'))
-
-        Vue.axios.get('types/?model=process&use_for=location&for=add').then((response) => {
-            this.types = _.orderBy(response.data, 'name')
-            if (this.$auth.user().roles[0].name == 'census') {
-                var typesForCensus = []
-                var typesProcessed = 0
-                var self = this
-                this.types.forEach(function (type, index, object) {
-                    typesProcessed++
-                    if (type.id == 2 || type.id == 3 || type.id == 34 || type.id == 35) {
-                        typesForCensus.push(type)
-                    }
-                    if (typesProcessed === self.types.length) {
-                        self.types = typesForCensus
-                    }
-                })
-            }
-
-            if (this.$auth.user().roles[0].name == 'storage-observer') {
-                var typesForStorageObserver = []
-                var typesProcessed = 0
-                var self = this
-                this.types.forEach(function (type, index, object) {
-                    typesProcessed++
-                    if (type.id == 35) {
-                        typesForStorageObserver.push(type)
-                    }
-                    if (typesProcessed === self.types.length) {
-                        self.types = typesForStorageObserver
-                    }
-                })
-            }
-
-            if (this.$auth.user().roles[0].name == 'recipient') {
-                var typesForRecipient = []
-                var typesProcessed = 0
-                var self = this
-                this.types.forEach(function (type, index, object) {
-                    typesProcessed++
-                    if (type.id == 1 || type.id == 2) {
-                        typesForRecipient.push(type)
-                    }
-                    if (typesProcessed === self.types.length) {
-                        self.types = typesForRecipient
-                    }
-                })
-            }
-
-        })
-
-        Vue.axios.get('locations/' + this.$route.params.locationHashid + '/1').then((response) => {
-            this.sends = response.data
-        })
-
-        Vue.axios.get('locations/' + this.$route.params.locationHashid + '/2').then((response) => {
-            this.deliveries = response.data
-        })
-
-        Vue.axios.get('locations/' + this.$route.params.locationHashid + '/3').then((response) => {
-            this.unloads = response.data
-        })
-
-        Vue.axios.get('locations/' + this.$route.params.locationHashid + '/33').then((response) => {
-            this.frosts = response.data
-        })
-
-        Vue.axios.get('locations').then((response) => {
-            this.locations = response.data.data
-        })
-
-        Vue.axios.get('locations').then((response) => {
-            this.locations = response.data
-        })
-
-        Vue.axios.get('vehicles').then((response) => {
-            this.vehicles = response.data
-        })
-
-        Vue.axios.get('drivers').then((response) => {
-            this.drivers = response.data
-        })
-
-        Vue.axios.get('packages').then((response) => {
-            this.packages = response.data
-        })
-
-        Vue.axios.get('sizes').then((response) => {
-            this.sizes = response.data
-        })
-
-        Vue.axios.get('grades').then((response) => {
-            this.grades = response.data
-        })
-
-        this.setLocation(this.$route.params.locationHashid)
-
-    },
-
-    methods: {
-        saveProcess () {
-            Vue.axios.post('processes/add/?model=location&processable=' + this.location.hashid, this.process)
-                .then((response) => {
-                    this.setSnackbarText('Process added successfully')
-                    this.setSnackbarShow(true)
-                    this.$router.push('/locations/' + this.location.hashid)
-                })
-                .catch((response) => {
-
-                })
-        },
-
-        setLocation (locationHashid) {
-            if (locationHashid) {
-                Vue.axios.get('locations/' + locationHashid).then((response) => {
-                    this.location = response.data
-                })
-            }
-        },
-
-        addAnotherPackage () {
-            this.process.packages.push({
-                id: 0,
-                pivot: {
-                    quantity: 0,
-                    floor: null,
-                    unload_id: null,
-                    storage_id: null
-                }
-            })
-        },
-
-        removePackage (index) {
-            this.process.packages.splice(index, 1)
-        },
-
-        ...mapMutations([
-            'setPageTitle',
-            'setSnackbarText',
-            'setSnackbarShow',
-        ])
-    },
-}
+    }
 </script>
