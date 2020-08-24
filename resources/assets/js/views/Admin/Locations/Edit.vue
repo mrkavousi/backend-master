@@ -169,7 +169,6 @@
                 <md-tab v-if="$auth.user().roles[0].name == 'admin'" id="tab-edit" :md-label="Translate('edit.location')">
                     <div class="md-layout">
                         <div class="md-layout-item md-size-75 md-small-size-50 md-xsmall-size-100">
-                            <br v-if="location.type.id === 12">
 
                             <md-card>
                                 <md-card-content>
@@ -281,6 +280,25 @@ export default {
         location: {
             name: '',
             description: '',
+            type: {
+                id: 0
+            },
+            parent: {
+                id: 0
+            },
+            city: {
+                id: 0
+            },
+            metadatas: {
+                coordinate: '',
+                capacity: null,
+                harvesting_at: null,
+                feed_time_per_day: null,
+                tunnels_count: null,
+                total_cost: 0,
+                total_weight: 0,
+                aquatic: null
+            },
             packages: [
                 {
                     id: 0,
@@ -290,11 +308,6 @@ export default {
                 }
             ],
             processes: [],
-            metadatas: {
-                total_cost: 0,
-                total_weight: 0,
-                aquatic: null
-            }
         },
 
         packageSummaries: null,
@@ -308,6 +321,9 @@ export default {
             }
         },
 
+        cities: [],
+        locations: [],
+        types: [],
         packages: [],
         processTypes: [],
         selectedProcessType: 0,
@@ -325,7 +341,7 @@ export default {
             this.cities = response.data
         })
 
-        Vue.axios.get('locations').then((response) => {
+        Vue.axios.get('locationsAdmin').then((response) => {
             this.locations = response.data
         })
 
