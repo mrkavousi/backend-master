@@ -28,6 +28,13 @@ class LocationController extends Controller
         return $projects;
     }
 
+    public function locationsParent()
+    {
+        return Location::where('parent_id', null)->latest()->paginate(50);
+
+        return $projects;
+    }
+
     public function adminSingle(Request $request, $hashid)
     {
         $locationId = Hashids::connection('general')->decode($hashid);
