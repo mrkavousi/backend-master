@@ -162,6 +162,7 @@ use Illuminate\Http\Request;
             // List
             Route::get('/locations', 'Location\LocationController@adminList')->name('api.locations');
             Route::get('/locationsAdmin', 'Location\LocationController@adminListPage')->name('api.locationsAdmin');
+            Route::get('/locationsParent', 'Location\LocationController@locationsParent')->name('api.locationsAdmin');
             // Add
             Route::post('/locations/add', 'Location\LocationController@adminAdd')->name('api.locations.add');
             // Single
