@@ -1,6 +1,6 @@
 <template>
     <div>
-        <md-card v-if="$auth.user().roles[0].name == 'admin' || $auth.user().roles[0].name == 'census' || $auth.user().roles[0].name == 'storage-observer' || $auth.user().roles[0].name == 'recipient'" class="md-dark mb-4">
+        <!--<md-card v-if="$auth.user().roles[0].name == 'admin' || $auth.user().roles[0].name == 'census' || $auth.user().roles[0].name == 'storage-observer' || $auth.user().roles[0].name == 'recipient'" class="md-dark mb-4">
             <md-card-header>
                 <md-card-header-text>
                     <div class="md-title">{{ Translate('projects') }}</div>
@@ -30,7 +30,7 @@
                 <md-button v-if="$auth.user().roles[0].name == 'admin'" to="/projects/add">{{ Translate('add') }}</md-button>
                 <md-button to="/projects">{{ Translate('manage.all') }}</md-button>
             </md-card-actions>
-        </md-card>
+        </md-card>-->
         <md-card v-if="$auth.user().roles[0].name == 'admin' || $auth.user().roles[0].name == 'census' || $auth.user().roles[0].name == 'storage-observer' || $auth.user().roles[0].name == 'recipient'" class="md-dark mb-4">
             <md-card-header>
                 <md-card-header-text>
@@ -131,11 +131,11 @@ export default {
     created () {
         this.setPageTitle(this.Translate('dashboard'))
         
-        Vue.axios.get('projects').then((response) => {
+       /* Vue.axios.get('projects').then((response) => {
             this.projects = response.data.data.slice(0, 3)
-        })
+        })*/
 
-        Vue.axios.get('locationsAdmin').then((response) => {
+        Vue.axios.get('locationsParent').then((response) => {
             this.locations = response.data.data.slice(0, 3)
         })
 
