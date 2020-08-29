@@ -78,7 +78,7 @@
 
                                     <p>{{filteredProcesses.length}} {{ Translate('results') }}:</p>
 
-
+                                <div v-if="filteredProcesses.length > 0">
                                     <div v-for="(process, index) in filteredProcesses" :key="index">
 
                                         <p><b>{{ Translate(process.type.slug) }}</b> <small>({{process.created_at | moment("from", "now")}}) <md-tooltip md-direction="top">{{process.created_at}}</md-tooltip> - {{ Translate('status') }}: {{getStatusName(process.status)}}</small></p>
@@ -160,7 +160,7 @@
 
                                         <md-divider></md-divider>
                                     </div>
-
+                                </div>
                                 </md-card-content>
                             </md-card>
                         </div>
@@ -180,13 +180,7 @@
                                         </md-select>
                                     </md-field>
 
-                                    <md-field v-if="locations">
-                                        <label for="locations">{{ Translate('parent.location') }}</label>
-                                        <md-select v-model="location.parent.id" id="locations">
-                                            <md-option v-for="location in locations" :key="location.id" :value="location.id">{{location.name}}</md-option>
-                                        </md-select>
-                                        <span class="md-helper-text">{{ Translate('optional') }}</span>
-                                    </md-field>
+
 
                                     <md-field v-if="types">
                                         <label for="locationType">{{ Translate('location.type') }}</label>
@@ -446,6 +440,15 @@ export default {
             })
         },
 
+        getStatusName (status) {
+            const statuses = {
+                0: this.Translate('upcoming'),
+                1: this.Translate('doing'),
+                2: this.Translate('done')
+            }
+
+            return statuses[status]
+        },
         exportProcesses (type) {
             window.open(Vue.axios.defaults.baseURL + 'locations/' + this.$route.params.hashid + '/' + type + '/export', '_blank')
         },
