@@ -13,13 +13,6 @@
                             <span class="md-helper-text">{{ Translate('optional') }}</span>
                         </md-field>
 
-                        <md-field>
-                            <label for="processLocation">{{ Translate('location') }}</label>
-                            <md-select v-model="process.location.id" id="processLocation">
-                                <md-option v-for="location in types" :key="type.id" :value="type.id">{{ Translate(type.slug) }}</md-option>
-                            </md-select>
-                        </md-field>
-
 
                         <md-field>
                             <label for="processType">{{ Translate('process.type') }}</label>
@@ -36,13 +29,6 @@
                             </md-select>
                         </md-field>
 
-
-                        <!-- <md-field v-if="process.type.id == 1 || process.type.id == 2">
-                            <label for="from">From</label>
-                            <md-select v-model="process.from.id" id="from">
-                                <md-option v-for="location in locations" :key="location.id" :value="location.id">{{location.name}}</md-option>
-                            </md-select>
-                        </md-field> -->
 
                         <md-field v-if="process.type.id == 1">
                             <label for="vehicle">{{ Translate('vehicle') }}</label>
