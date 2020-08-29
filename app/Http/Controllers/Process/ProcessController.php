@@ -135,13 +135,15 @@ class ProcessController extends Controller
                         }
                     }
                 }
+                if ($request->model == 'project') {
+                    Cache::forget('projects');
+                    Cache::forget('project' . $request->processable);
+                }
+                if ($request->model == 'location'){
+                    Cache::forget('locations');
+                    Cache::forget('location' . $request->processable);
 
-                Cache::forget('projects');
-                Cache::forget('project' . $request->processable);
-
-                Cache::forget('locations');
-                Cache::forget('location' . $request->processable);
-    
+                }
                 return $process;
     
             }
