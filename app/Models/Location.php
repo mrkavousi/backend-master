@@ -46,6 +46,6 @@ class Location extends Model
 
     public function processes()
     {
-        return $this->hasMany('App\Models\Process', 'processable_id');
+        return $this->hasMany('App\Models\Process', 'processable_id','id');
     }
 }
