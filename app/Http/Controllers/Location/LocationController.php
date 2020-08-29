@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Location;
 
+use App\Models\Process;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Location;
@@ -23,16 +24,16 @@ class LocationController extends Controller
     public function adminListPage()
     {
 
-        return Location::latest()->paginate(50);
+        return Location::latest()->paginate(20);
 
-        return $projects;
+        return $locations;
     }
 
     public function locationsParent()
     {
-        return Location::where('parent_id', null)->latest()->paginate(50);
+        return Location::where('parent_id', null)->latest()->paginate(20);
 
-        return $projects;
+        return $locations;
     }
 
     public function adminSingle(Request $request, $hashid)
@@ -51,7 +52,6 @@ class LocationController extends Controller
             $location->metadatas = array_merge($location->metadatas, [$meta->key => $meta->value]);
         }
         unset($location->metadata);
-
         foreach ($location->processes as $process) {
             $process->metadatas = [];
             foreach ($process->metadata as $meta) {
