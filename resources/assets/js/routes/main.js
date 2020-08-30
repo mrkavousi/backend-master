@@ -28,7 +28,7 @@ import Locations from '../views/Admin/Locations/List.vue'
 import LocationsAdd from '../views/Admin/Locations/Add.vue'
 import LocationsEdit from '../views/Admin/Locations/Edit.vue'
 import LocationsProsessesAdd from '../views/Admin/Locations/AddProcess.vue'
-import LocationsrosessesEdit from '../views/Admin/Locations/EditProcess.vue'
+import LocationsProsessesEdit from '../views/Admin/Locations/EditProcess.vue'
 
 import Vehicles from '../views/Admin/Vehicles/List.vue'
 import VehiclesAdd from '../views/Admin/Vehicles/Add.vue'
@@ -291,6 +291,23 @@ export default new Router({
             }
         },
 
+        {
+            path: '/locations/:locationHashid/processes/add',
+            name: 'locations.processes.add',
+            component: LocationsProsessesAdd,
+            meta: {
+                auth: true
+            }
+        },
+
+        {
+            path: '/locations/:locationHashid/processes/:processHashid',
+            name: 'locations.processes.edit',
+            component: LocationsProsessesEdit,
+            meta: {
+                auth: true
+            }
+        },
 
         {
             path: '/vehicles',
