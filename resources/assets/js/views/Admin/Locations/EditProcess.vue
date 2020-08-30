@@ -1,6 +1,6 @@
 <template>
     <form>
-        <div class="processes processes-edit project-processes-edit  md-layout">
+        <div class="processes processes-edit location-processes-edit  md-layout">
             <div class="md-layout-item md-size-75 md-small-size-50 md-xsmall-size-100">
                 <md-card>
                     <md-card-content>

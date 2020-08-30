@@ -263,7 +263,6 @@
 <script>
 import Vue from 'vue'
 import { mapMutations } from 'vuex'
-import PolarChart from '../../../components/PolarChart.vue'
 import DoughnutChart from '../../../components/DoughnutChart.vue'
 
 export default {

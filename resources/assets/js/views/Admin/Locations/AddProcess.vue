@@ -393,9 +393,6 @@
                 driver: {
                     id: 0
                 },
-                location: {
-                    id: 0
-                },
                 packages: [
                     {
                         id: 0,
