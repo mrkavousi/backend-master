@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "@websanova/vue-auth": "^2.21.14-beta",
-        "chart.js": "^2.7.2",
+        "chart.js": "^2.9.4",
         "material-design-icons": "^3.0.1",
         "nprogress": "^0.2.0",
         "vue-axios": "^2.1.3",
